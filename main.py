@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 import time
 import serial
+from ObjectDetection import *
 
 # Serial Initialization
 ser = serial.Serial('/dev/ttyACM0', 9600) # Change into your Arduino Port
@@ -24,13 +25,21 @@ dataUltra = {}
 dataMag = {}
 dataRfid = {}
 dataPir = {}
+dataCam = {}
 while True:
 	if(ser.in_waiting > 0):
 		data = ser.readline().decode().split()
 		if data[0] == "U":
-			print(f"Ultrasonic {data[1]}")
-			dataUltra["Ultrasonic"] = data[1]
-			client.publish(topic, json.dumps(dataUltra))
+			if int(data[1]) < 150 :
+				print(f"Ultrasonic {data[1]}")
+				dataUltra["Ultrasonic"] = data[1]
+				if int(data[1]) < 100 :
+					detected = capturePhoto()
+					if detected:
+						dataCam["Camera"] = "Person Detected"
+						print(f"Camera {dataCam['Camera']}")
+						client.publish(topic, json.dumps(dataCam))
+				client.publish(topic, json.dumps(dataUltra))
 		elif data[0] == "M":
 			status = "Opened" if data[1] == "1" else "Closed"
 			print(f"Magnetic {status}")
@@ -49,4 +58,10 @@ while True:
 			status = "Motion Detected" if data[1] == "1" else "Motion Ended"
 			print(f"PIR {status}")
 			dataPir["PIR"] = status
+			if int(data[1]):
+				detected = capturePhoto()
+				if detected:
+					dataCam["Camera"] = "Person Detected"
+					print(f"Camera {dataCam['Camera']}")
+					client.publish(topic, json.dumps(dataCam))
 			client.publish(topic, json.dumps(dataPir))

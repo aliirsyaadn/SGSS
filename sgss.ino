@@ -65,7 +65,7 @@ void loop() {
   Serial.println(ultra);
   
   
-  if (ultra < 40){
+  if (ultra < 200){
     digitalWrite(LED_BUILTIN, HIGH);  
   } else {
     digitalWrite(LED_BUILTIN, LOW);  
