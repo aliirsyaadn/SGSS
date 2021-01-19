@@ -30,9 +30,9 @@ sudo reboot
 
 ## Arduino Setup:
 1. Install library lcd and rfid in arduinoLibrary folder and FreeRTOS
-2. Make sure all pin right base on top of comment program in sgss.ino
-3. Change RFID id and name in sgss.ino into your RFID id and name
-4. Write sgss.ino into your arduino mega and run it
+2. Make sure all pin right base on top of comment program in sgss.ino / sgssRTOS.ino
+3. Change RFID id and name in sgss.ino / sgssRTOS.ino into your RFID id and name
+4. Write sgss.ino / sgssRTOS.ino into your arduino mega and run it
 
 ## Raspberry Pi Setup:
 1. Change arduino port and username id in main.py
