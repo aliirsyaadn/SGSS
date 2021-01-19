@@ -3,19 +3,23 @@ import json
 import time
 import serial
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+# Serial Initialization
+ser = serial.Serial('/dev/ttyACM0', 9600) # Change into your Arduino Port
 
+# Declare variable to connect to Thingsboard
 broker = "demo.thingsboard.io"
 port = 1883
-username = "ixrN3vNdkHnpGmXYDic8"
+username = "ixrN3vNdkHnpGmXYDic8" # Change into your user id in thingsboard
 password = ""
 topic = "v1/devices/me/telemetry"
 
+# Connect to thingsboard
 client = mqtt.Client()
 client.username_pw_set(username, password)
 client.connect(broker, port)
 print("Connection Establish..")
 
+# Main Program
 dataUltra = {}
 dataMag = {}
 dataRfid = {}
