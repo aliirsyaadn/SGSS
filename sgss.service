@@ -1,0 +1,12 @@
+[Unit]
+Description=Smart Gate Security System
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/Documents/embedded/SGSS
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+
+[Install]
+WantedBy=graphical.target
+

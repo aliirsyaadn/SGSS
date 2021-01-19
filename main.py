@@ -30,10 +30,10 @@ while True:
 	if(ser.in_waiting > 0):
 		data = ser.readline().decode().split()
 		if data[0] == "U":
-			if int(data[1]) < 150 :
+			if int(data[1]) < 200 :
 				print(f"Ultrasonic {data[1]}")
 				dataUltra["Ultrasonic"] = data[1]
-				if int(data[1]) < 100 :
+				if int(data[1]) < 100 and dataMag["Magnetic Switch"] == "Closed":
 					detected = capturePhoto()
 					if detected:
 						dataCam["Camera"] = "Person Detected"
