@@ -1,7 +1,7 @@
 # Smart Gate Security System
 Final Project for Embedded System Course Fasilkom UI 2020/2021
 
-Smart Gate Security System (SGSS) adalah suatu sistem tertanam IoT berbasis arduino - raspberry pi yang berguna untuk mendeteksi jarak suatu objek ke gate (pintu), pergerakan objek, status pintu terbuka atau tidak, dan alarm jika terdapat objek atau seseorang masuk. Informasi-informasi tersebut dapat dimonitor dan dikontrol melalui web server yang dapat diakses oleh semua device yang berada pada jaringan tersebut.
+Smart Gate Security System (SGSS) adalah suatu sistem tertanam IoT dan AI berbasis arduino - raspberry pi yang berguna untuk mendeteksi jarak suatu objek ke gate (pintu), pergerakan objek, human detection camera untuk unusual activity, status pintu terbuka atau tidak, dan alarm jika terdapat unauthenticated objek atau seseorang masuk. Untuk authentication menggunakan RFID yang teregister pada arduino. Informasi-informasi tersebut dapat dimonitor melalui web server Thinsboard yang dapat diakses internet.
 
 ## Installation:
 Install Dependency and Paho MQTT:
@@ -27,9 +27,16 @@ make -j4
 sudo make install && sudo ldconfig
 sudo reboot
 ```
-## Running Program:
-1. Write sgss.ino into your Arduino Mega and make sure all pin right base on top of comment program in sgss.ino
-2. Change arduino port and username id in main.py
+
+## Arduino Setup:
+1. Install library lcd and rfid in arduinoLibrary folder and FreeRTOS
+2. Make sure all pin right base on top of comment program in sgss.ino
+3. Change RFID id and name in sgss.ino into your RFID id and name
+4. Write sgss.ino into your arduino mega and run it
+
+## Raspberry Pi Setup:
+1. Change arduino port and username id in main.py
+2. Change in main.py directory path to your absolute path of objectDetectionData folder
 3. Run main.py in following command
 ```
 python3 main.y
