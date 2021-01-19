@@ -64,9 +64,9 @@ void setup() {
   rfid.init();
   lcd.init();
   lcd.backlight();
-  xTaskCreate(Task_Ultra, "Ultra" , 128, NULL, 2, NULL );
-  xTaskCreate(Task_Pir, "Ultra" , 128, NULL, 2, NULL );
-  xTaskCreate(Task_Mag_Rfid, "Ultra" , 128, NULL, 1, NULL );
+  xTaskCreate(Task_Ultra, "Ultra" , 128, NULL, 1, NULL );
+  xTaskCreate(Task_Pir, "Pir" , 128, NULL, 1, NULL );
+  xTaskCreate(Task_Mag_Rfid, "MagRfid" , 128, NULL, 1, NULL );
   
 }
 
@@ -85,7 +85,7 @@ void readSignalUltra(){
   Serial.print("U ");
   Serial.println(ultra);
   
-  if (ultra < 200){
+  if (ultra < 100){
     digitalWrite(LED_BUILTIN, HIGH);  
   } else {
     digitalWrite(LED_BUILTIN, LOW);  
@@ -178,7 +178,7 @@ void Task_Ultra(void *pvParameters)
     for (;;) 
     {
     readSignalUltra();
-    vTaskDelay(500);
+    vTaskDelay(50);
     } 
 }
 
@@ -189,7 +189,7 @@ void Task_Pir(void *pvParameters)
     for (;;) 
     {
     readSignalPir();
-    vTaskDelay(500);
+    vTaskDelay(50);
     } 
 }
 
@@ -201,6 +201,6 @@ void Task_Mag_Rfid(void *pvParameters)
     {
     readSignalMag();
     readSignalRfid();
-    vTaskDelay(500);
+    vTaskDelay(50);
     } 
 }
